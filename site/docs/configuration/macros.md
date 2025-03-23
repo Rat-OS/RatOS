@@ -183,8 +183,8 @@ Use this variable to set name for the bed_mesh profile that RatOS calibrate and 
 | variable_is_fixed                   | True / False    | False   | VAOC is installed on a fix position.                                    |
 | variable_safe_z                     | number          | 60      | Safe z-height for xy travel moves.                                      |
 | variable_auto_z_offset_calibration  | True / False    | True    | Performs a auto z-offset calibration before the print starts if needed. |
-| variable_enable_camera_cooling      | True / False    | True    | Enables the part cooling fan of the currently loaded toolhead.          |
-| variable_camera_cooling_fan_speed   | number          | 0.3     | Part cooling fan speed of the currently loaded toolhead.                |
+| variable_enable_camera_cooling      | True / False    | True    | Enables the part cooling fan of the VAOC camera module.                 |
+| variable_camera_cooling_fan_speed   | number          | 0.3     | Cooling fan speed for VAOC Camera module cooling fan.                   |
 | variable_camera_cooling_temperature | number          | 50      | Enables the integrated VAOC fan at the configured bed temperature.      |
 | variable_toolchange_travel_speed    | number          | 300     | XY travel move speeds.                                                  |
 | variable_toolchange_travel_accel    | number          | 5000    | XY travel move sccelerations.                                           |
