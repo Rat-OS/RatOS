@@ -55,7 +55,7 @@ jobs:
         config: ${{ fromJson(needs.setup.outputs.matrix) }}
     steps:
       - name: Cache aptitude
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: repository/src/workspace/aptcache
           key: ${{ matrix.config }}-apt-get-${{ hashFiles('**/apt.txt') }}
