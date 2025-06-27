@@ -194,7 +194,7 @@ jobs:
         config: ${{ fromJson(needs.matrix.outputs.matrix) }}
     steps:
       - name: Cache aptitude
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: repository/src/workspace/aptcache
           key: ${{ runner.os }}-apt-get-${{ hashFiles('**/apt.txt') }}
@@ -211,7 +211,7 @@ jobs:
 
       - name: Upload failed Logfile
         if: failure()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: failed-${{ steps.move-image.outputs.image }}.log
           path: repository/src/build.log
