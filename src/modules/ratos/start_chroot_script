@@ -70,11 +70,11 @@ check_install_pkgs ${RATOS_DEPS}
 
 
 # Install RatOS Configurator
-sudo -u "${BASE_USER}" bash /home/"${BASE_USER}"/ratos-configurator/scripts/setup.sh
+sudo -u "${BASE_USER}" bash /home/"${BASE_USER}"/ratos-configurator/app/scripts/setup.sh
 
 # Start the configurator so extensions can access the API
 echo "Starting RatOS Configurator"
-pushd "/home/${BASE_USER}/ratos-configurator"
+pushd "/home/${BASE_USER}/ratos-configurator/app"
 sudo -u "${BASE_USER}" npm run start &
 # Wait for configurator to start
 # shellcheck disable=SC2016

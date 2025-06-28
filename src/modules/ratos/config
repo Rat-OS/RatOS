@@ -16,7 +16,7 @@
 [ -n "$RATOS_THEME_SHIP" ] || RATOS_THEME_SHIP=https://github.com/Rat-OS/RatOS-theme.git
 [ -n "$RATOS_THEME_BRANCH" ] || RATOS_THEME_BRANCH=v2.1.x
 [ -n "$RATOS_CONFIGURATOR_SHIP" ] || RATOS_CONFIGURATOR_SHIP=https://github.com/Rat-OS/RatOS-configurator.git
-[ -n "$RATOS_CONFIGURATOR_BRANCH" ] || RATOS_CONFIGURATOR_BRANCH=v2.1.x-deployment
+[ -n "$RATOS_CONFIGURATOR_BRANCH" ] || RATOS_CONFIGURATOR_BRANCH=dev-deployment
 
 #### NOTE:
 #### python3-serial is a klipper requirement
