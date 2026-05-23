@@ -1,0 +1,6 @@
+allowBuilds:
+  '@swc/core': true
+  '@tsparticles/engine': true
+  core-js: true
+  core-js-pure: true
+  sharp: true

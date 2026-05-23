@@ -11,21 +11,31 @@ jobs:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - name: Checkout
+        uses: actions/checkout@v6
         with:
-          version: 9.14.2
+          persist-credentials: false
+      - uses: pnpm/action-setup@v6
+        with:
+          cache: true
+          package_json_file: site/package.json
+          cache_dependency_path: site/pnpm-lock.yaml
       - uses: actions/setup-node@v4
         with:
-          node-version: 20.
-          cache: 'pnpm'
-          cache-dependency-path: site/pnpm-lock.yaml
+          node-version: 24
 
       - name: Build website
         working-directory: site
         run: |
           pnpm install --frozen-lockfile
           pnpm run build
+
+      - name: Commit changes
+        id: extract_repo_name
+        run: |
+          # Extract only the repo name from 'owner/repo-name'
+          echo "repo_name=$(echo "${{ github.repository }}" | cut -d'/' -f2)" >> "$GITHUB_OUTPUT"
+
       # Popular action to deploy to GitHub Pages:
       # Docs: https://github.com/peaceiris/actions-gh-pages#%EF%B8%8F-docusaurus
       - name: Deploy to GitHub Pages
@@ -34,5 +44,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           # Build output to publish to the `gh-pages` branch:
           publish_dir: ./docs
-          user_name: Mikkel Schmidt
-          user_email: mikkel.schmidt@gmail.com
+          user_name: ${{ steps.extract_repo_name.outputs.repo_name }}
+          user_email: actions@github.com
