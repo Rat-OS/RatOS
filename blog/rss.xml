@@ -13,10 +13,10 @@
             <link>https://os.ratrig.com/blog/breaking-changes-in-v2-1-1</link>
             <guid>https://os.ratrig.com/blog/breaking-changes-in-v2-1-1</guid>
             <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[RatOS v2.1.1 will be released soon, and includes some hardware pin configuration changes that may affect a small number of machines.]]></description>
-            <content:encoded><![CDATA[<p>RatOS v2.1.1 will be released soon, and includes some hardware pin configuration changes that may affect a small number of machines.</p>
+            <description><![CDATA[RatOS minor update v2.1.1 will be released soon, and includes some hardware pin configuration changes that may affect some machines.]]></description>
+            <content:encoded><![CDATA[<p>RatOS minor update v2.1.1 will be released soon, and includes some hardware pin configuration changes that may affect some machines.</p>
 <p><strong>NOTE: Machines built using stock RatRig V-Core 4.0 and 4.1 hardware are not affected.</strong></p>
-<p>Please review the following <strong>potentially breaking</strong> changes carefully before upgrading machines using the following boards. You may need to adjust machine wiring or add overrides to <code>printer.cfg</code>.</p>
+<p>Please review the following <strong>potentially breaking</strong> changes carefully before upgrading machines using the affected boards. You may need to adjust machine wiring or add overrides to <code>printer.cfg</code>.</p>
 <ul>
 <li>Octopus Pro H723 V1.1 (control board)<!-- -->
 <ul>
