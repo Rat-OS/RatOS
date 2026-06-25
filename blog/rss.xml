@@ -4,10 +4,36 @@
         <title>RatOS Blog</title>
         <link>https://os.ratrig.com/blog</link>
         <description>RatOS Blog</description>
-        <lastBuildDate>Tue, 23 May 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 25 Jun 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Breaking changes in RatOS v2.1.1]]></title>
+            <link>https://os.ratrig.com/blog/breaking-changes-in-v2-1-1</link>
+            <guid>https://os.ratrig.com/blog/breaking-changes-in-v2-1-1</guid>
+            <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[RatOS v2.1.1 will be released soon, and includes some hardware pin configuration changes that may affect a small number of machines.]]></description>
+            <content:encoded><![CDATA[<p>RatOS v2.1.1 will be released soon, and includes some hardware pin configuration changes that may affect a small number of machines.</p>
+<p><strong>NOTE: Machines built using stock RatRig V-Core 4.0 and 4.1 hardware are not affected.</strong></p>
+<p>Please review the following <strong>potentially breaking</strong> changes carefully before upgrading machines using the following boards. You may need to adjust machine wiring or add overrides to <code>printer.cfg</code>.</p>
+<ul>
+<li>Octopus Pro H273 V1.1 (control board)<!-- -->
+<ul>
+<li><code>ratrig_vaoc_led_pin</code> has been changed from <code>PB0</code> to <code>PB10</code> (<a href="https://github.com/Rat-OS/RatOS-configurator/pull/141" target="_blank" rel="noopener noreferrer">#141</a>)</li>
+<li><code>y1_enable_pin</code> and <code>e_heater_pin</code> were swapped. The assignments are now <code>y1_enable_pin</code>=<code>PA2</code>, <code>e_heater_pin</code>=<code>PA0</code> (<a href="https://github.com/Rat-OS/RatOS-configurator/pull/134" target="_blank" rel="noopener noreferrer">#134</a>)</li>
+</ul>
+</li>
+<li>EBB42 Gen 2 (toolboard)<!-- -->
+<ul>
+<li><code>filament_sensor_runout_pin</code> has been changed from <code>PA3</code> to <code>PA10</code> (<a href="https://github.com/Rat-OS/RatOS-configurator/pull/141" target="_blank" rel="noopener noreferrer">#141</a>)</li>
+</ul>
+</li>
+</ul>
+<p>Other control and tool boards are not affected.</p>]]></content:encoded>
+            <category>RatOS</category>
+            <category>Releases</category>
+        </item>
         <item>
             <title><![CDATA[Crowsnest v4 contains breaking changes and requires manual steps to upgrade.]]></title>
             <link>https://os.ratrig.com/blog/crowsnest-v4-breaking-changes-manual-upgrade</link>

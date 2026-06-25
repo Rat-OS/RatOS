@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunksite=self.webpackChunksite||[]).push([["2134"],{96007:function(t){t.exports=JSON.parse('{"authors":[{"name":"Mikkel Schmidt","title":"Creator of RatOS","url":"https://github.com/miklschmidt","imageURL":"https://github.com/miklschmidt.png","key":"miklschmidt","page":null,"count":6}]}')}}]);
