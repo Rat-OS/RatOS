@@ -18,7 +18,7 @@
 <p><strong>NOTE: Machines built using stock RatRig V-Core 4.0 and 4.1 hardware are not affected.</strong></p>
 <p>Please review the following <strong>potentially breaking</strong> changes carefully before upgrading machines using the following boards. You may need to adjust machine wiring or add overrides to <code>printer.cfg</code>.</p>
 <ul>
-<li>Octopus Pro H273 V1.1 (control board)<!-- -->
+<li>Octopus Pro H723 V1.1 (control board)<!-- -->
 <ul>
 <li><code>ratrig_vaoc_led_pin</code> has been changed from <code>PB0</code> to <code>PB10</code> (<a href="https://github.com/Rat-OS/RatOS-configurator/pull/141" target="_blank" rel="noopener noreferrer">#141</a>)</li>
 <li><code>y1_enable_pin</code> and <code>e_heater_pin</code> were swapped. The assignments are now <code>y1_enable_pin</code>=<code>PA2</code>, <code>e_heater_pin</code>=<code>PA0</code> (<a href="https://github.com/Rat-OS/RatOS-configurator/pull/134" target="_blank" rel="noopener noreferrer">#134</a>)</li>
