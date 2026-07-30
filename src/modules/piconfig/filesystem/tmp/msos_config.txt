@@ -43,6 +43,10 @@ gpu_mem=256
 ## BTT Pi TFT's touch don't work with KMS on pi4 so we use FKMS for now.
 dtoverlay=vc4-fkms-v3d
 
+[pi5]
+## Pi 5 always uses KMS and manages GPU memory itself - no gpu_mem/dtoverlay
+## split needed here, unlike earlier models.
+
 [all]
 
 ## SPI Interface is enabled by default for Input Shaper

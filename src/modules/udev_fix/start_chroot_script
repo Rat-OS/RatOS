@@ -36,6 +36,9 @@ if [[ -f /etc/armbian.txt ]]; then
 fi
 
 # Step 2: Fix broken udev (remove after debian releases patch)
+# NOTE: the 'deb11u2' match below is Bullseye-specific and intentionally
+# scopes this fix to that release - the bug is fixed upstream on Bookworm/
+# Trixie, so this is a deliberate no-op there, not dead code to remove.
 UDEV_PKG_VERSION="$(dpkg-query -s udev | grep "Version" | sed 's/Version\: //')"
 
 if [[ -n "${UDEV_PKG_VERSION}" ]] && [[ "${UDEV_PKG_VERSION}" =~ "deb11u2" ]]; then

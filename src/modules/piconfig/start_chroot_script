@@ -20,6 +20,16 @@ fi
 source /common.sh
 install_cleanup_trap
 
+## Raspberry Pi OS Bookworm+ moved config.txt/cmdline.txt from /boot to
+## /boot/firmware (the previous Bullseye base image used /boot directly).
+## Detect the real location so this module keeps working across base images.
+if [[ -f /boot/firmware/config.txt ]]; then
+    PICONFIG_CONFIG_TXT_FILE="/boot/firmware/config.txt"
+    PICONFIG_CMDLINE_TXT_FILE="/boot/firmware/cmdline.txt"
+    PICONFIG_CONFIG_BAK_FILE="/boot/firmware/config.txt.backup"
+    PICONFIG_CMDLINE_BAK_FILE="/boot/firmware/cmdline.txt.backup"
+fi
+
 # Step 1: Copy msos_config.txt
 echo_green "Copying temporary file ..."
 unpack /filesystem/tmp /tmp root
@@ -81,10 +91,20 @@ systemctl_if_exists disable bluealsa.service
 
 
 # Step 11: Increase swapfile size
+# Raspberry Pi OS Trixie replaced dphys-swapfile with rpi-swap; handle both.
 if [[ -f "${PICONFIG_SWAP_CONF_FILE}" ]]; then
     echo_green "Increasing swap file size to ${PICONFIG_SWAP_SIZE} Mb. Limit to ${PICONFIG_SWAP_MAX} Mb"
     sed -i 's/^CONF_SWAPSIZE.*/'CONF_SWAPSIZE="${PICONFIG_SWAP_SIZE}"'/' "${PICONFIG_SWAP_CONF_FILE}"
     sed -i 's/^#CONF_MAXSWAP.*/'CONF_MAXSWAP="${PICONFIG_SWAP_MAX}"'/' "${PICONFIG_SWAP_CONF_FILE}"
+elif dpkg-query -s rpi-swap &>/dev/null; then
+    echo_green "Configuring swap (rpi-swap): ${PICONFIG_SWAP_SIZE} MiB, max ${PICONFIG_SWAP_MAX} MiB"
+    mkdir -p /etc/rpi/swap.conf.d
+    cat > /etc/rpi/swap.conf.d/10-ratos.conf << EOF
+# Managed by RatOS build - swap size tuning
+[File]
+FixedSizeMiB=${PICONFIG_SWAP_SIZE}
+MaxSizeMiB=${PICONFIG_SWAP_MAX}
+EOF
 fi
 
 # Step 12: Enable autologin (required for Pi3's, Pi4's do this by default, for some reason)
@@ -100,3 +120,21 @@ EOF
 echo_green "Generating and setting default locale to en_US.UTF-8..."
 # Use en_US.UTF-8 as default locale
 raspi-config nonint do_change_locale en_US.UTF-8
+
+# Step 14: Provision the default user account and enable SSH.
+# Bullseye images shipped a baked-in "pi" account; Bookworm+ does not, so it
+# has to be provisioned in-chroot via raspberrypi-sys-mods' userconf-pi (the
+# same mechanism Raspberry Pi Imager's "customize" flow uses).
+if [ -f /usr/lib/userconf-pi/userconf ]; then
+    echo_green "Provisioning default user ${BASE_USER}..."
+    hash="$(echo "${BASE_PASSWORD:-raspberry}" | openssl passwd -6 -stdin)"
+    /usr/lib/userconf-pi/userconf "${BASE_USER}" "${hash}"
+fi
+systemctl_if_exists disable userconfig.service
+
+echo_green "Enabling SSH..."
+if [ -f /usr/lib/raspberrypi-sys-mods/imager_custom ]; then
+    /usr/lib/raspberrypi-sys-mods/imager_custom enable_ssh
+else
+    systemctl_if_exists enable ssh
+fi

@@ -17,9 +17,9 @@ echo needs_root_rights=yes>>/etc/X11/Xwrapper.config
 
 echo_green "Installing KlipperScreen"
 
-cd /home/pi
+cd "/home/${BASE_USER}"
 gitclone KLIPPERSCREEN KlipperScreen
-cd /home/pi/KlipperScreen
+cd "/home/${BASE_USER}/KlipperScreen"
 sudo -u "${BASE_USER}" NETWORK="skipnetworkmanagerinstall" ./scripts/KlipperScreen-install.sh
 
 # Mute output from klipperscreen service

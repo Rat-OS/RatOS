@@ -23,7 +23,9 @@ CN_BUILD_PACKAGE_FILE="/tmp/cn_packages.lst"
 
 # Helper Func
 is_raspbian() {
-    if [[ -f /boot/config.txt ]] && [[ -f /etc/rpi-issue ]]; then
+    # config.txt lives at /boot on Bullseye/Bookworm-legacy and at
+    # /boot/firmware on Bookworm+ (see piconfig module for the same check).
+    if { [[ -f /boot/config.txt ]] || [[ -f /boot/firmware/config.txt ]]; } && [[ -f /etc/rpi-issue ]]; then
         echo "1"
     else
         echo "0"

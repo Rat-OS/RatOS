@@ -9,22 +9,20 @@ install_cleanup_trap
 
 echo_green "Installing RPI MCU service"
 
-pushd /home/pi/klipper
+pushd "/home/${BASE_USER}/klipper"
 echo "flashing rpi-mcu"
-cp -f /home/pi/printer_data/config/RatOS/boards/rpi/firmware.config /home/pi/klipper/.config
+cp -f "/home/${BASE_USER}/printer_data/config/RatOS/boards/rpi/firmware.config" "/home/${BASE_USER}/klipper/.config"
 make olddefconfig
 make clean
 # Reset ownership so make flash doesn't complain
-chown pi:pi -R /home/pi/klipper
+chown "${BASE_USER}:${BASE_USER}" -R "/home/${BASE_USER}/klipper"
 make flash
 popd
 
-pushd /home/${BASE_USER}/klipper
+pushd "/home/${BASE_USER}/klipper"
 sudo cp "./scripts/klipper-mcu.service" /etc/systemd/system/klipper_mcu.service
 sudo systemctl enable klipper_mcu.service
 popd
 
-
-
 # Reset ownership
-chown pi:pi -R /home/pi/klipper
+chown "${BASE_USER}:${BASE_USER}" -R "/home/${BASE_USER}/klipper"
